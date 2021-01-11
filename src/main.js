@@ -12,11 +12,12 @@ Vue.use(VueLazyload, {
 
 // UI框架
 import ElementUI from 'element-ui';
-import '@/assets/css/my-theme.scss';
+import './assets/css/my-theme.scss';
 Vue.use(ElementUI);
 
 // 基础样式
-import '@/assets/css/style.scss'
+import './assets/css/bootstrap-reboot.scss'
+import './assets/css/style.scss'
 
 // Ajax请求方案
 import axios from './libs/sendRequest'
@@ -28,7 +29,7 @@ Vue.use(VueCookies)
 Vue.$cookies.config('3d')
 
 //i18n
-import i18n from './i18njs'
+import i18n from './libs/i18njs'
 
 Vue.config.productionTip = false
 
