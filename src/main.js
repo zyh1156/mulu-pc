@@ -7,7 +7,8 @@ import store from './store'
 import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload, {
     throttleWait: 500,
-    error: require('./assets/images/mulook.png')
+    error: require('./assets/images/mulook.png'),
+    loading: require('./assets/images/mulook.png')
 })
 
 // UI框架

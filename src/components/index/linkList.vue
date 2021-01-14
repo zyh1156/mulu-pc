@@ -43,8 +43,6 @@ export default {
 <style lang="scss" scoped>
 .link-box {
     padding-bottom: 44px;
-  .link-ul {
-  }
   .link-li {
     width: 130px;
     height: 80px;

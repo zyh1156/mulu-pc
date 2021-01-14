@@ -48,7 +48,7 @@ export default {
       leftLink: [
         {
           url: {
-            path: "/",
+            name: "index",
           },
           text: "首页",
         },
@@ -66,7 +66,7 @@ export default {
         },
         {
           url: {
-            name: "material",
+            name: "product",
           },
           text: "材料",
         },
@@ -126,7 +126,8 @@ export default {
     cursor: pointer;
     position: relative;
     display: block;
-    &.link-active {
+    &.link-active:nth-child(n + 2),
+    &.link-exact-active {
       color: $primary-color;
       &::after {
         content: "";
@@ -138,9 +139,6 @@ export default {
         background: $primary-color;
         box-shadow: 0px 3px 6px $primary-color;
       }
-    }
-    &:hover {
-      color: $primary-color;
     }
   }
 }

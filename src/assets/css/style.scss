@@ -1,3 +1,4 @@
+@import './color.scss';
 //阿里巴巴普惠体
 @font-face {
     font-family: 'aliPHM';
@@ -31,4 +32,37 @@
 
 .crumb-box {
     padding: 20px 0 22px;
+}
+
+.search-status {
+    .img {
+        height: 300px;
+        background: center/auto 258px url(../images/nodata.png) no-repeat;
+    }
+    .text {
+        color: #999;
+        text-align: center;
+        position: relative;
+        span {
+            line-height: 17px;
+        }
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            width: 240px;
+            border-top: 1px solid #ccc;
+            top: 8px;
+        }
+        &::before {
+            left: calc(50% - 305px);
+        }
+        &::after {
+            right: calc(50% - 305px);
+        }
+    }
+}
+
+a:hover {
+    color: $primary-color;
 }

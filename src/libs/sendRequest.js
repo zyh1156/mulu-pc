@@ -49,12 +49,13 @@ instance.interceptors.response.use(function(response) {
                 errmsg = data.error;
             }
             //增加阈值，避免多次弹窗及反复跳转
-            if (errorNum) return Promise.reject(error);
+            if (errorNum)
+                return Promise.reject(error);
             errorNum++;
             Message.error({
                 message: errmsg,
                 onClose: () => {
-                    return;
+                    VueCookies.remove('token');
                     vueRouter.push({
                         path: "/login"
                     })
@@ -65,6 +66,7 @@ instance.interceptors.response.use(function(response) {
             Message.error({
                 message: data.message
             })
+            console.log(123);
         }
         return Promise.reject(error);
     } else {

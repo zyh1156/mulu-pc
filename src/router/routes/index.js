@@ -6,8 +6,11 @@ import reurl from './reurl'
 import zerus from './zerus'
 // 用户中心
 import user from "./user"
+// 商家店铺
+import company from './company'
 export default [{
         path: '/',
+        name: "index",
         component: index
     },
     {
@@ -21,11 +24,6 @@ export default [{
         name: 'demand',
         component: reurl('demand/index')
 
-    },
-    {
-        path: '/material',
-        name: 'material',
-        component: reurl('material/index')
     }, {
         path: "/product",
         component: zerus,
@@ -39,22 +37,12 @@ export default [{
             name: 'materiel'
         }]
     }, {
-        path: "/company",
-        component: zerus,
-        children: [{
-            path: "",
-            redirect: "/about",
-        }, {
-            path: ":companyid",
-            component: reurl("company/index"),
-            name: "company"
-        }]
-    }, {
         path: '/about',
         component: reurl('pages/about'),
         name: 'about'
     }, {
-
         ...user
+    }, {
+        ...company
     }
 ]

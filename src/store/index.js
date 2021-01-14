@@ -3,16 +3,16 @@ import Vuex from 'vuex'
 
 import user from './module/user'
 
-import another from './module/another'
-
 import auth from './module/auth'
+
+import company from './module/company'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     modules: {
         user,
-        another,
-        auth
+        auth,
+        company
     }
 })

@@ -8,6 +8,7 @@ const router = new VueRouter({
     routes,
     mode: 'history',
     linkActiveClass: 'link-active',
+    linkExactActiveClass: 'link-exact-active',
     scrollBehavior() {
         return {
             x: 0,

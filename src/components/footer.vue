@@ -44,9 +44,6 @@ export default {
   a {
     color: inherit;
     text-decoration: none;
-    &:hover {
-      color: $primary-color;
-    }
   }
   .qr-code {
     margin-left: 100px;

@@ -55,7 +55,6 @@ export default {
     font: 16px/22px "aliPHR";
     transition: all 0.4s;
     &:hover {
-      color: $primary-color;
       padding-right: 42px;
       background-position: right center;
     }
