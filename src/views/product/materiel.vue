@@ -132,7 +132,7 @@ export default {
         },
       ],
       mater: {
-        shopId:'0',
+        shopId: "0",
         proImgLists: [],
       },
       introInx: 0,
@@ -144,6 +144,9 @@ export default {
     hdiv,
     fdiv,
     mattr,
+  },
+  beforeDestroy() {
+    document.querySelector("body").removeAttribute("style");
   },
   mounted() {
     document.querySelector("body").style.backgroundColor = "#fff";

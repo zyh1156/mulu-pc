@@ -7,7 +7,7 @@
       class="collect-box d-flex justify-content-center"
       :class="{ active: cl.colleconTag == 1 }"
     >
-      <div class="collect-ico">
+      <div @click.prevent="tosc" class="collect-ico">
         <span v-if="cl.colleconTag == 1">已收藏</span>
         <span v-else>收藏</span>
       </div>
@@ -40,6 +40,11 @@ export default {
       default: {},
     },
   },
+  methods:{
+    tosc(){
+
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

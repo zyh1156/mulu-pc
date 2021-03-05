@@ -8,7 +8,7 @@
         v-for="(sl, inx) in sliderList"
         :key="inx"
       >
-        <img :src="sl.sliderImg" :alt="sl.sliderTitle" />
+        <img :src="sl" :alt="sl.sliderTitle" />
       </el-carousel-item>
     </el-carousel>
     <section class="container">
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import hdiv from "@/components//header";
+import hdiv from "@/components/header";
 import recommend from "../components/index/recommend";
 import linkList from "@/components/index/linkList";
 import fdiv from "@/components/footer";
@@ -36,7 +36,11 @@ export default {
   },
   data() {
     return {
-      sliderList: [],
+      sliderList: [
+        require("../assets/images/banner1.png"),
+        require("../assets/images/banner0.png"),
+        require("../assets/images/banner2.png"),
+      ],
       productList: [],
       links: [],
     };
@@ -51,7 +55,7 @@ export default {
         params: { handlerName: "indexHandler" },
         headers: { Authorization: "" },
       }).then((res) => {
-        this.sliderList = res.data.sliderList;
+        // this.sliderList = res.data.sliderList;
         this.productList = res.data.productList;
         this.links = res.data.linkList;
       });

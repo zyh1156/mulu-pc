@@ -28,14 +28,15 @@
         </div>
         <!-- 菜单栏 -->
         <div class="link-box d-flex right-link">
-          <div
-            :to="ll.url"
+          <a
+            :key="inx"
+            :href="ll.url"
+            :target="ll.blank ? '_blank' : '_self'"
             class="link-li"
             v-for="(ll, inx) in rightLink"
-            :key="inx"
           >
             {{ ll.text }}
-          </div>
+          </a>
         </div>
       </div>
     </div>
@@ -73,17 +74,18 @@ export default {
       ],
       rightLink: [
         {
-          url: {},
+          url: "https://d.mulook.com",
+          blank: true,
           text: "设计工具",
         },
         {
-          url: {
-            name: "login",
-          },
+          url: "/login",
+          blank: false,
           text: "登录/注册",
         },
         {
-          url: {},
+          url: "https://d.mulook.com",
+          blank: false,
           text: "操作指南",
         },
       ],
@@ -154,6 +156,7 @@ export default {
     font: 12px/32px "aliPHR";
   }
   .icon {
+    cursor: pointer;
     margin: 0 20px 0 10px;
     img {
       height: 25px;

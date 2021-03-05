@@ -11,6 +11,32 @@ export default {
     }, {
         path: ":companyid",
         component: reurl("company/index"),
-        name: "company"
+        children: [{
+            path: "",
+            component: reurl("company/home"),
+            name: "company",
+        }, {
+            path: "brief",
+            component: reurl("company/brief"),
+            name: "cbrief"
+
+        }, {
+            path: "case",
+            component: zerus,
+            children: [{
+                path: "",
+                component: reurl("company/case"),
+                name: "ccase"
+            }, {
+                path: ":caseid",
+                component: reurl('company/case-detail')
+            }]
+
+        }, {
+            path: "data",
+            component: reurl("company/data"),
+            name: "cdata"
+
+        }]
     }]
 }

@@ -8,6 +8,8 @@ import zerus from './zerus'
 import user from "./user"
 // 商家店铺
 import company from './company'
+// 登陆注册
+import login from './login'
 export default [{
         path: '/',
         name: "index",
@@ -44,5 +46,7 @@ export default [{
         ...user
     }, {
         ...company
-    }
+    }, {
+        ...login
+    },
 ]

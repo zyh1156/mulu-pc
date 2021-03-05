@@ -42,13 +42,14 @@ export default {
   .mater-li {
     padding: 25px;
     border-top: #eee 1px solid;
-    transform: translateY(0);
-    transition: all 0.4s linear;
+    transform: translateY(0) translate3d(0, 0, 0);
+    transition: transform 0.4s linear;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0);
     background-color: #fff;
     .img-box {
       width: 160px;
       height: 120px;
+      flex-shrink: 0;
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
@@ -58,14 +59,11 @@ export default {
     .text-box {
       padding-left: 20px;
       font-family: "aliPHM";
-      font-size: 14px;
-      line-height: 33px;
-      & > div {
-        height: 33px;
-      }
+      font-size: 16px;
+      line-height: 30px;
     }
     &:hover {
-      transform: translateY(-2px);
+      transform: translateY(-2px) translate3d(0, 0, 0);
       box-shadow: 0px 2px 24px rgba(12, 0, 51, 0.1);
     }
     &:first-child {

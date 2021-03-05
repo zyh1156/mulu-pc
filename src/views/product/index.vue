@@ -243,17 +243,14 @@ export default {
     getData() {
       this.searchBox.status = 1;
       let arr = this.productList;
-      let data = this.search;
-      this.axios
-        .get("/product/page", { params: this.search }, { Authorization: "" })
-        .then((res) => {
-          this.searchBox = {
-            status: 2,
-            page: res.data.pages,
-            nosearch: res.data.records.length == 0,
-          };
-          this.productList = arr.concat(res.data.records);
-        });
+      this.axios.get("/product/page", { params: this.search }).then((res) => {
+        this.searchBox = {
+          status: 2,
+          page: res.data.pages,
+          nosearch: res.data.records.length == 0,
+        };
+        this.productList = arr.concat(res.data.records);
+      });
     },
     getFirst() {
       this.axios({
@@ -465,6 +462,6 @@ export default {
   background-color: #fff;
   border-radius: 8px;
   padding-bottom: 24px;
-  min-height: 412px;
+  min-height: calc(100vh - 500px);
 }
 </style>

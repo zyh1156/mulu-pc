@@ -66,3 +66,9 @@
 a:hover {
     color: $primary-color;
 }
+
+.max-img {
+    img {
+        max-width: 100%;
+    }
+}
