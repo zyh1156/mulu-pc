@@ -19,6 +19,7 @@ body {
     background: #f3f3f3;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    padding-right: 0!important;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -473,6 +474,10 @@ progress {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.position-relative {
+    position: relative;
 }
 
 a,
