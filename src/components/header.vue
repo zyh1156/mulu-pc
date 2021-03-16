@@ -12,6 +12,7 @@
             class="link-li"
             v-for="(ll, inx) in leftLink"
             :key="inx"
+            v-show="!ll.disabled"
           >
             {{ ll.text }}
           </router-link>
@@ -58,6 +59,7 @@ export default {
             name: "case",
           },
           text: "案例",
+          disabled: true,
         },
         {
           url: {
@@ -153,11 +155,12 @@ export default {
     border: none;
     background-color: transparent;
     outline: none;
+    width: 100%;
     font: 12px/32px "aliPHR";
   }
   .icon {
     cursor: pointer;
-    margin: 0 20px 0 10px;
+    margin: 0 19px 0 9px;
     img {
       height: 25px;
     }

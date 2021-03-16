@@ -6,9 +6,10 @@
       <div class="demand-search d-flex">
         <el-input
           class="h-50"
+          @blur="searchData"
           placeholder="请输入内容"
           prefix-icon="el-icon-search"
-          v-model="search.params.keywords"
+          v-model="search.params.demandTitle"
         >
         </el-input>
         <div class="release"></div>
@@ -43,7 +44,7 @@
               v-show="inx < 3"
               v-for="(di, inx) in dl.demandImages2"
               :key="inx"
-              @click.stop="showbigimg(di)"
+              @click.stop="showbigimg(dl, inx)"
               class="img-li d-flex justify-content-center align-items-center"
             >
               <img v-lazy="di" :key="di" alt="" />
@@ -51,13 +52,13 @@
           </div>
           <div class="foot d-flex justify-content-between">
             <div class="d-flex">
-              <div class="time">2020年5月31日</div>
+              <div class="time">{{ dl.publishDate }}</div>
               <!-- <div class="num">2336</div> -->
             </div>
             <div></div>
           </div>
         </div>
-        <div class="search-status">
+        <div class="search-status w-100">
           <div v-if="searchBox.nosearch" class="img"></div>
           <div v-else class="text">
             <span v-if="searchBox.status == 2">我是有底线的</span>
@@ -89,21 +90,34 @@
             v-show="inx < 9"
             v-for="(di, inx) in demand.demandImages2"
             :key="inx"
-            @click.stop="showbigimg(di)"
+            @click.stop="showbigimg(demand, inx)"
             class="img-li d-flex justify-content-center align-items-center"
           >
             <img v-lazy="di" :key="di" alt="" />
           </div>
         </div>
         <div class="btns">
-          <div class="btn-li">联系方式</div>
+          <div class="btn-li" v-if="showtel">
+            <span>联系电话：</span>
+            <span>{{ demand.telephone }}</span>
+          </div>
+          <div class="btn-li" @click="looktel">联系方式</div>
         </div>
       </div>
     </div>
     <el-dialog :visible.sync="dialogVisible" top="8vh" width="80%">
-      <div class="big-img">
-        <img :src="imgsrc" :key="imgsrc" alt="" />
-      </div>
+      <el-carousel
+        indicator-position="outside"
+        :autoplay="false"
+        :initial-index="imgindex"
+        height="calc(84vh - 120px)"
+      >
+        <el-carousel-item v-for="(item, inx) in imglist" :key="inx">
+          <div class="big-img">
+            <img :src="item" :key="item" alt="" />
+          </div>
+        </el-carousel-item>
+      </el-carousel>
     </el-dialog>
   </section>
 </template>
@@ -115,12 +129,14 @@ export default {
     return {
       dialogVisible: false,
       formVisible: false,
-      imgsrc: "",
+      imgindex: 0,
+      imglist: [],
       demand: {},
       demandList: [],
+      showtel: false,
       search: {
         params: {
-          keywords: "",
+          demandTitle: "",
         },
         limit: 12,
         page: 1,
@@ -144,7 +160,11 @@ export default {
     this.toSee();
   },
   methods: {
+    looktel() {
+      this.showtel = true;
+    },
     closeForm() {
+      this.imgindex = 0;
       this.formVisible = false;
     },
     openli(dl) {
@@ -174,9 +194,15 @@ export default {
         this.getData();
       }
     },
-    showbigimg(url) {
-      this.imgsrc = url;
+    showbigimg(dl, inx) {
+      this.imglist = dl.demandImages2;
+      this.imgindex = inx;
       this.dialogVisible = true;
+    },
+    searchData() {
+      this.demandList = [];
+      this.search.page = 1;
+      this.getData();
     },
     getData() {
       this.searchBox.status = 1;
@@ -208,8 +234,9 @@ export default {
     flex-shrink: 0;
     width: 50px;
     height: 50px;
-    background-color: #fff;
+    background: #fff center/14px no-repeat;
     border-radius: 8px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAwElEQVRIS+1WwQnDMAyUIPp3k2aEZgQ/jNdoJ2nXCH5khHYEZ5O+bYOKgwOFFmx92o/0Mz5J5riTjCCMZVkOKaV7SSOiyRjzlJRACbhgvfcnZt4aIuJkrX1IamjDD7aU0paAVDQqGvmkqbPx2FLX2/0IALd6PgNA6M0lohXneQ6IKGnYW/8bLvy0ITOvWCjNOReaemNk5mvdFhcJpcMwBDW+Gl9u/F5p7jhdwC3G1If/92GZvTHG7bftnJPM4O3xLynP3O+n30bOAAAAAElFTkSuQmCC);
   }
 }
 
@@ -402,9 +429,10 @@ export default {
       width: 100%;
       position: absolute;
       .btn-li {
+        cursor: pointer;
         color: #fff;
         width: 251px;
-        margin: 0 auto;
+        margin: 20px auto 0;
         background-color: $primary-color;
         border-radius: 22px;
         padding: 11px 0;

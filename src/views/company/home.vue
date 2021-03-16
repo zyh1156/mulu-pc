@@ -184,12 +184,12 @@ export default {
         height: 178px;
         background: center/cover no-repeat;
         transform: scale(1) translate3d(0, 0, 0);
-        transition: all 0.2s linear;
-      }
+        transition: transform 0.2s linear;
+      } 
     }
     .txt-box {
       height: 38px;
-      padding: 9px;
+      padding: 9px; 
       line-height: 20px;
     }
     &:hover {

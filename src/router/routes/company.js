@@ -29,7 +29,8 @@ export default {
                 name: "ccase"
             }, {
                 path: ":caseid",
-                component: reurl('company/case-detail')
+                component: reurl("company/case-detail"),
+                name: "ccasedetail"
             }]
 
         }, {

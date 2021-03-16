@@ -5,6 +5,10 @@ export default {
     component: reurl('account/background'),
     children: [{
         path: "",
-        component: reurl('account/login')
+        component: reurl('account/login'),
+        meta: {
+            title: "登录"
+        },
+        name: "login"
     }]
 }

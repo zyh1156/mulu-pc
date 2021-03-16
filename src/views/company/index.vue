@@ -8,7 +8,7 @@
           <router-link :to="{ path: '/' }">返回首页</router-link>
         </div>
         <div>
-          <router-link :to="{ path: '/' }">注册/登录</router-link>
+          <router-link :to="{ name: 'login' }">注册/登录</router-link>
         </div>
       </div>
     </div>
@@ -51,7 +51,28 @@
             <div class="share-btn">分享店铺</div>
           </div>
         </div>
-        <div class="com-classify cbox">
+        <div class="com-classify cbox" v-if="caseMode">
+          <div class="ctit">店铺案例分类</div>
+          <el-collapse v-model="groupInx" accordion>
+            <el-collapse-item
+              v-for="(gl, inx) in groupList"
+              :key="inx"
+              :title="gl.classification"
+              :name="gl.classification"
+            >
+              <div
+                @click="setCaseId(glc.caseId)"
+                class="cg-li"
+                v-for="(glc, inx2) in gl.child"
+                :key="inx2"
+                :class="{ active: groupId == glc.caseId }"
+              >
+                {{ glc.caseName }}
+              </div>
+            </el-collapse-item>
+          </el-collapse>
+        </div>
+        <div class="com-classify cbox" v-else>
           <div class="ctit">店铺产品分类</div>
           <el-collapse v-model="groupInx" @change="setgroupId" accordion>
             <el-collapse-item
@@ -61,13 +82,13 @@
               :name="gl.groupId"
             >
               <div
-                @click="setgroupId(gl.groupId)"
+                @click="setgroupId(glc.groupId)"
                 class="cg-li"
-                v-for="(gl, inx2) in gl.child"
+                v-for="(glc, inx2) in gl.child"
                 :key="inx2"
-                :class="{ active: groupId == gl.groupId }"
+                :class="{ active: groupId == glc.groupId }"
               >
-                {{ gl.groupName }}
+                {{ glc.groupName }}
               </div>
             </el-collapse-item>
           </el-collapse>
@@ -84,6 +105,7 @@
               v-for="(l, inx) in links"
               :key="inx"
               :to="l.path"
+              v-show="!l.disabled"
             >
               <span>{{ l.text }}</span>
             </router-link>
@@ -117,12 +139,17 @@ export default {
         { path: { name: "company" }, text: "首页" },
         { path: { name: "cbrief" }, text: "店铺简介" },
         { path: { name: "ccase" }, text: "企业案例" },
-        { path: { name: "cdata" }, text: "PDF资料" },
+        { path: { name: "cdata" }, text: "PDF资料", disabled: true },
       ],
     };
   },
   components: {
     fdiv,
+  },
+  watch: {
+    $route() {
+      this.getMode();
+    },
   },
   mounted() {
     this.getData();
@@ -130,7 +157,7 @@ export default {
   },
   methods: {
     getMode() {
-      let flag = this.$route.params.caseid || this.$route.name == "ccase";
+      let flag = this.$route.params.caseid || this.$route.name == "ccasedetail";
       if (flag) {
         // 获取案例分类
         this.getCase();
@@ -138,10 +165,22 @@ export default {
         // 获取店铺分类
         this.getGroup();
       }
+      this.caseMode = flag;
     },
     setgroupId(gid) {
       this.groupId = gid;
       this.$store.commit("setgroupId", gid);
+    },
+    setCaseId(cid) {
+      this.groupId = cid;
+      if (this.$route.params.caseid != cid) {
+        this.$router.replace({
+          name: "ccasedetail",
+          params: {
+            caseid: cid,
+          },
+        });
+      }
     },
     getCase() {
       let comid = this.$route.params.companyid;
@@ -150,7 +189,23 @@ export default {
           params: { companyId: comid },
         })
         .then((res) => {
-          console.log(res);
+          let arr = [],
+            flag;
+          for (let i = 0; i < res.data.length; i++) {
+            flag = true;
+            arr.forEach((ele) => {
+              flag = false;
+              ele.classification == res.data[i].classification;
+              ele.child.push(res.data[i]);
+            });
+            if (flag) {
+              arr.push({
+                classification: res.data[i].classification,
+                child: [res.data[i]],
+              });
+            }
+          }
+          this.groupList = arr;
         });
     },
     getGroup() {
