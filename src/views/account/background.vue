@@ -17,7 +17,7 @@ export default {
     return {};
   },
   mounted() {
-    // this.setBac();
+    this.setBac();
   },
   methods: {
     setBac() {
