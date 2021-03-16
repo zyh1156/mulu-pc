@@ -1,47 +1,10 @@
 <template>
   <div class="bac">
     <div class="title d-flex align-items-end">
-      <div
-        class="tit w-125"
-        @click="changeType(0)"
-        :class="{ active: type == 0 }"
-      >
-        密码登录
-      </div>
-      <div class="tit" @click="changeType(1)" :class="{ active: type == 1 }">
-        验证码登录
-      </div>
+      <div class="tit active w-125">找回密码</div>
     </div>
-    <!-- 密码登录 -->
-    <form action="javascript:;" v-if="type == 0">
-      <div class="form-box">
-        <input
-          type="text"
-          name="username"
-          v-model="udata.username"
-          placeholder="请输入账号"
-        />
-      </div>
-      <div class="form-box d-flex align-items-center">
-        <input
-          :type="readpass ? 'text' : 'password'"
-          :class="{ 'mes-code': !readpass }"
-          placeholder="请输入密码"
-          maxlength="16"
-          name="password"
-          v-model="udata.password"
-        />
-        <div @click="readpass = !readpass">
-          <div v-if="readpass" class="eye-0"></div>
-          <div v-else class="eye-1"></div>
-        </div>
-      </div>
-      <div class="btn-box">
-        <button class="w-100 login-btn" type="submit">登录</button>
-      </div>
-    </form>
     <!-- 验证码登录 -->
-    <form action="javascript:;" v-if="type == 1">
+    <form action="javascript:;">
       <div class="form-box">
         <input
           type="text"
@@ -64,12 +27,12 @@
         </div>
       </div>
       <div class="btn-box">
-        <button class="w-100 login-btn" type="submit">登录</button>
+        <button class="w-100 login-btn" type="submit">确认修改</button>
       </div>
     </form>
     <div class="d-flex links">
-      <router-link class="li0" :to="{ name: 'forgot' }">忘记密码</router-link>
-      <router-link class="li1" :to="{ name: 'register' }">免费注册</router-link>
+      <span>已有帐号？</span>
+      <router-link class="li0" :to="{ name: 'login' }">登录</router-link>
     </div>
   </div>
 </template>
@@ -194,23 +157,13 @@ export default {
   }
 }
 .links {
-  color: $primary-color;
+  color: #999;
   margin-top: 13px;
   font: 14px/20px "aliPHR";
+  justify-content: flex-end;
   .li0 {
-    padding-right: 10px;
-  }
-  .li1 {
-    padding-left: 10px;
-    position: relative;
-    &::after {
-      content: "";
-      position: absolute;
-      border-left: 1px solid #ccc;
-      height: 10px;
-      top: 3px;
-      left: 0;
-    }
+    margin: 0 5px;
+    color: $primary-color;
   }
 }
 </style>

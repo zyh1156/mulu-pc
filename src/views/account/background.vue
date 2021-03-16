@@ -16,13 +16,13 @@ export default {
   data() {
     return {};
   },
+  mounted() {
+    // this.setBac();
+  },
   methods: {
     setBac() {
       particlesJS("particles-js", option);
     },
-  },
-  mounted() {
-    this.setBac();
   },
 };
 </script>

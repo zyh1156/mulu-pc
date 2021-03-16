@@ -10,5 +10,19 @@ export default {
             title: "登录"
         },
         name: "login"
+    }, {
+        path: "forgot",
+        component: reurl('account/forgot'),
+        meta: {
+            title: "忘记密码",
+        },
+        name: "forgot"
+    }, {
+        path: "register",
+        component: reurl('account/register'),
+        meta: {
+            title: "注册",
+        },
+        name: "register"
     }]
 }

@@ -1,48 +1,26 @@
 <template>
   <div class="bac">
-    <div class="title d-flex align-items-end">
-      <div
-        class="tit w-125"
-        @click="changeType(0)"
-        :class="{ active: type == 0 }"
-      >
-        密码登录
-      </div>
-      <div class="tit" @click="changeType(1)" :class="{ active: type == 1 }">
-        验证码登录
-      </div>
+    <div class="title">
+      <div class="tit active">现在注册，即可免费使用</div>
+      <div class="tit2">数字装饰，设计未来</div>
     </div>
-    <!-- 密码登录 -->
-    <form action="javascript:;" v-if="type == 0">
-      <div class="form-box">
-        <input
-          type="text"
-          name="username"
-          v-model="udata.username"
-          placeholder="请输入账号"
-        />
-      </div>
-      <div class="form-box d-flex align-items-center">
-        <input
-          :type="readpass ? 'text' : 'password'"
-          :class="{ 'mes-code': !readpass }"
-          placeholder="请输入密码"
-          maxlength="16"
-          name="password"
-          v-model="udata.password"
-        />
-        <div @click="readpass = !readpass">
-          <div v-if="readpass" class="eye-0"></div>
-          <div v-else class="eye-1"></div>
-        </div>
-      </div>
-      <div class="btn-box">
-        <button class="w-100 login-btn" type="submit">登录</button>
-      </div>
-    </form>
     <!-- 验证码登录 -->
-    <form action="javascript:;" v-if="type == 1">
-      <div class="form-box">
+    <form action="javascript:;">
+      <div class="form-box d-flex align-items-center">
+        <el-dropdown trigger="click" class="flex-shrink-0">
+          <span class="el-dropdown-link">
+              <span>请选择身份</span>
+            <i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>个人</el-dropdown-item>
+            <el-dropdown-item>供应商</el-dropdown-item>
+            <el-dropdown-item>开发商</el-dropdown-item>
+            <el-dropdown-item>施工方</el-dropdown-item>
+            <el-dropdown-item>设计方</el-dropdown-item>
+            <el-dropdown-item>酒店管理</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
         <input
           type="text"
           name="username"
@@ -68,8 +46,17 @@
       </div>
     </form>
     <div class="d-flex links">
-      <router-link class="li0" :to="{ name: 'forgot' }">忘记密码</router-link>
-      <router-link class="li1" :to="{ name: 'register' }">免费注册</router-link>
+      <label class="d-flex align-items-center">
+        <input type="checkbox" />
+        <span>我已阅读并同意</span>
+        <router-link class="li0" :to="{ name: 'login' }">用户协议</router-link>
+        <span>、</span>
+        <router-link class="li0" :to="{ name: 'login' }">隐私政策</router-link>
+      </label>
+      <div>
+        <span>已有帐号？</span>
+        <router-link class="li0" :to="{ name: 'login' }">登录</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -121,24 +108,25 @@ export default {
 .bac {
   background-color: rgba(255, 255, 255, 0.86);
   border-radius: 8px;
-  padding: 51px 56px 91px;
+  padding: 51px 56px 0;
   position: relative;
   width: 551px;
+  min-height: 550px;
 }
 .title {
-  padding-bottom: 28px;
   .tit {
     color: #aaa;
-    cursor: pointer;
     font: 20px/27px "aliPHR";
     &.active {
       color: #333;
       font-size: 26px;
       line-height: 35px;
     }
-    &.w-125 {
-      width: 125px;
-    }
+  }
+  .tit2 {
+    color: #999;
+    margin-top: 6px;
+    font: 16px/22px "aliPHR";
   }
 }
 .form-box {
@@ -194,23 +182,16 @@ export default {
   }
 }
 .links {
-  color: $primary-color;
+  color: #999;
   margin-top: 13px;
   font: 14px/20px "aliPHR";
-  .li0 {
-    padding-right: 10px;
+  justify-content: space-between;
+  input {
+    margin-right: 5px;
   }
-  .li1 {
-    padding-left: 10px;
-    position: relative;
-    &::after {
-      content: "";
-      position: absolute;
-      border-left: 1px solid #ccc;
-      height: 10px;
-      top: 3px;
-      left: 0;
-    }
+  .li0 {
+    color: $primary-color;
+    padding: 0 2.5px;
   }
 }
 </style>
